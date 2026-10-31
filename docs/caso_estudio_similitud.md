@@ -116,6 +116,29 @@ cada abstract y luego se calcula el coseno entre los dos promedios. El resultado
 GloVe es `0.983108`; FastText da `0.970645`. Ambos detectan una relación
 semántica fuerte, aunque los métodos léxicos producen valores mucho menores.
 
+El detalle numérico reproducible para los promedios es:
+
+| Modelo | Dimensiones | Tokens cubiertos (art. 1 / 10) | Producto punto | Norma art. 1 | Norma art. 10 | Coseno |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| GloVe | 50 | 189/189, 209/210 | 12.050689 | 3.655881 | 3.352884 | 0.983108 |
+| FastText | 300 | 189/189, 210/210 | 0.364500 | 0.653788 | 0.574381 | 0.970645 |
+
+Los promedios son vectores `v̄ = (1/r) Σ v(w)` sobre los `r` tokens cubiertos.
+Para ilustrar su construcción, las primeras cinco coordenadas de GloVe son
+`v̄₁ = (0.297351, 0.153013, -0.083919, -0.105727, 0.244577, …)` y
+`v̄₁₀ = (0.257146, 0.177087, -0.126414, 0.063347, 0.098717, …)`. Para
+FastText, las primeras cinco son `v̄₁ = (0.001246, -0.015115, 0.018668,
+0.006588, -0.010064, …)` y `v̄₁₀ = (0.006663, -0.015334, 0.011097,
+0.008928, -0.023486, …)`. Los puntos suspensivos representan las coordenadas
+restantes, incluidas en las normas y productos punto de la tabla.
+
+En ambos casos se aplica `cos(v̄₁,v̄₁₀) = (v̄₁ · v̄₁₀) / (||v̄₁|| ||v̄₁₀||)`.
+Para GloVe, `12.050689 / (3.655881 × 3.352884) = 0.983108`; para FastText,
+`0.364500 / (0.653788 × 0.574381) = 0.970645` (las diferencias en el último
+decimal dependen del redondeo mostrado). El cálculo se realizó sobre todos los
+50 o 300 componentes, respectivamente, no solo los cinco que se imprimen como
+ilustración.
+
 La diferencia no significa que una escala sea universalmente mejor. Jaccard,
 Dice, TF-IDF y Levenshtein dependen de coincidencias literales; GloVe y FastText
 usan posiciones de vectores aprendidas de grandes corpus externos. Además, el

@@ -113,6 +113,73 @@ Rabin-Karp calcula `H("Si") = 21 353`, actualiza el hash al deslizar la ventana,
 y solo verifica carácter por carácter las ventanas cuyo hash es `16 713`; las
 coincidencias se confirman exactamente.
 
+Para hacer explícito el cálculo rolling de esa primera ventana:
+
+```text
+H("Si") = (256 × 83 + 105) mod q = 21 353
+H("in") = (256 × (21 353 - 83 × 256) + 110) mod q
+         = (256 × 105 + 110) mod q = 26 990
+```
+
+El siguiente paso sigue la misma actualización, quitando el primer carácter
+de la ventana anterior y añadiendo el carácter que entra. Cuando una ventana
+produce el hash `16 713`, el algoritmo comprueba sus caracteres contra `AI`;
+solo si ambos coinciden registra la posición. En esta ejecución no se observaron
+colisiones (`colisiones_hash = 0`); la verificación sigue siendo necesaria
+porque la función modular, en general, puede asignar el mismo hash a cadenas
+distintas.
+
+La tabla de Boyer-Moore se construye de izquierda a derecha: `A` se registra en
+0 y `I` en 1, dando `{A: 0, I: 1}`. Sus primeras alineaciones muestran la
+heurística y los saltos:
+
+| Inicio interno | Ventana | Comparación desde la derecha | Carácter malo | Desplazamiento | Resultado |
+| ---: | --- | --- | --- | ---: | --- |
+| 0 | `Si` | `I ≠ i` | `i` (ausente, última = -1) | 2 | desacuerdo |
+| 30 | `(A` | `I ≠ A` | `A` (última = 0) | 1 | desacuerdo |
+| 31 | `AI` | `I = I`, luego `A = A` | — | 1 | coincidencia, posición 32 |
+
+KMP primero calcula LPS `[0,0]`: en el patrón de dos caracteres no existe
+prefijo propio no vacío que también sea sufijo. Durante la búsqueda, cada
+desacuerdo con el primer carácter deja el índice del patrón en cero y avanza el
+índice del texto; al reconocer `AI`, emite el inicio y restaura el índice del
+patrón al último valor LPS (cero), lo que permite seguir buscando coincidencias.
+
+En esta primera coincidencia, el recorrido de KMP puede resumirse sin omitir
+ningún tramo: para cada índice de texto `0..30`, compara el carácter con `A`,
+falla con `j=0` y avanza el índice del texto una posición. En el índice 31,
+`A=A` avanza el patrón a `j=1`; en el índice 32, `I=I` completa el patrón y
+reporta el inicio 31 (posición 32). Como `LPS[1]=0`, el siguiente intento
+comienza con el patrón desde su primer carácter.
+
+Rabin-Karp calcula inicialmente `H("Si")=21 353`. La tabla muestra todos los
+hashes hasta la primera coincidencia; cada fila posterior se obtiene de la
+anterior con la fórmula rolling, no recalculando la cadena desde cero:
+
+| Inicio | Ventana | Hash | Inicio | Ventana | Hash |
+| ---: | --- | ---: | ---: | --- | ---: |
+| 0 | `Si` | 21 353 | 16 | ` i` | 8 297 |
+| 1 | `in` | 26 990 | 17 | `in` | 26 990 |
+| 2 | `nc` | 28 259 | 18 | `nt` | 28 276 |
+| 3 | `ce` | 25 445 | 19 | `te` | 29 797 |
+| 4 | `e ` | 25 888 | 20 | `el` | 25 964 |
+| 5 | ` a` | 8 289 | 21 | `ll` | 27 756 |
+| 6 | `ar` | 24 946 | 22 | `li` | 27 753 |
+| 7 | `rt` | 29 300 | 23 | `ig` | 26 983 |
+| 8 | `ti` | 29 801 | 24 | `ge` | 26 469 |
+| 9 | `if` | 26 982 | 25 | `en` | 25 966 |
+| 10 | `fi` | 26 217 | 26 | `nc` | 28 259 |
+| 11 | `ic` | 26 979 | 27 | `ce` | 25 445 |
+| 12 | `ci` | 25 449 | 28 | `e ` | 25 888 |
+| 13 | `ia` | 26 977 | 29 | ` (` | 8 232 |
+| 14 | `al` | 24 940 | 30 | `(A` | 10 305 |
+| 15 | `l ` | 27 680 | 31 | `AI` | 16 713 |
+
+Solo en el inicio 31 el hash de ventana coincide con el hash del patrón. Se
+verifican entonces los caracteres (`A=A`, `I=I`) y se reporta la posición. En
+estas 32 ventanas no hubo colisión; para cualquier coincidencia de hash, la
+verificación explícita previene reportar falsos positivos.
+
 ### Medición observada
 
 Se midió la búsqueda en los 20 abstracts, con siete repeticiones; se muestran

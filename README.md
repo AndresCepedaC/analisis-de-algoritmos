@@ -8,7 +8,11 @@ Aplicación para el análisis computacional de abstracts de 20 artículos cient�
 
 ## Estado del proyecto
 
-En desarrollo.
+Implementación local de los requerimientos 1–3; despliegue externo y documento
+final de entrega pendientes de definición y cierre.
+
+El diseño y la arquitectura están descritos en
+[`docs/diseno_tecnico.md`](docs/diseno_tecnico.md).
 
 ## Requerimiento 1: similitud textual
 
@@ -61,3 +65,25 @@ python main.py busqueda --patron "AI" --repeticiones 7
 Las posiciones y las medianas de siete mediciones separadas de
 preprocesamiento/búsqueda se guardan en `output/searching/`. La implementación y el caso de estudio están
 documentados en `docs/busqueda_cadenas.md`.
+
+## Diseño y entrega
+
+La matriz de cumplimiento está en `docs/revision_cumplimiento.md`; arquitectura
+y declaración de apoyo de IA, en `docs/diseno_tecnico.md`. Los módulos se
+ejecutan desde la raíz del proyecto; el PDF no fija una plataforma concreta
+para el despliegue.
+
+## Interfaz web
+
+La interfaz Streamlit vive en este mismo proyecto y reutiliza los módulos
+existentes. Para iniciarla localmente:
+
+```powershell
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
+```
+
+La guía de publicación en Streamlit Community Cloud y sus límites está en
+[`docs/despliegue_streamlit.md`](docs/despliegue_streamlit.md). La app ofrece
+similitud, clustering y búsqueda; los embeddings se activan solo cuando sus
+archivos locales están presentes.
