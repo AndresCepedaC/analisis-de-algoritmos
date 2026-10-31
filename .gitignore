@@ -1,0 +1,24 @@
+﻿# Entorno virtual
+.venv/
+venv/
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+
+# Archivos de configuración privados
+.env
+.env.*
+
+# Archivos de los artículos científicos originales
+data/articulos/
+
+# Texto extraído de los artículos
+texto_articulo.txt
+
+# Configuración de editores
+.vscode/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
