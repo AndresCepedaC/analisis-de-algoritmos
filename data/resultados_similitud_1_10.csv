@@ -1,0 +1,2 @@
+﻿id_a,id_b,Levenshtein normalizado,Coseno TF-IDF,Jaccard,Dice,GloVe (coseno),FastText (coseno),GloVe cobertura artículo A,GloVe cobertura artículo B,FastText cobertura artículo A,FastText cobertura artículo B
+1,10,0.30450321658327373,0.2524353052591802,0.1262135922330097,0.22413793103448276,0.9831081479425239,0.9706445212332394,189/189,209/210,189/189,210/210

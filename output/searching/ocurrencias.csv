@@ -1,0 +1,61 @@
+﻿algoritmo,id_articulo,titulo,cantidad,posiciones_1_based
+KMP,1,Artificial intelligence literacy in higher and adult education: A scoping literature review,7,32;112;271;381;391;512;981
+KMP,2,"Systematic literature review on opportunities, challenges, and future research recommendations of artificial intelligence in education",7,55;185;528;692;733;805;899
+KMP,3,"Myths, mis- and preconceptions of artificial intelligence: A review of the literature",14,26;183;247;347;542;559;854;913;1006;1046;1209;1291;1363;1546
+KMP,4,Opportunities of artificial intelligence for supporting complex problem-solving: Findings from a scoping review,5,105;564;935;1024;1179
+KMP,5,Application and theory gaps during the rise of Artificial Intelligence in Education,9,79;216;451;527;697;824;1024;1150;1774
+KMP,6,"A multi-perspective study on Artificial Intelligence in Education: grants, conferences, journals, software tools, institutions, and researchers",9,55;249;266;344;501;729;874;995;1112
+KMP,7,Human-centred learning analytics and AI in education: A systematic literature review,7,89;393;748;873;1144;1334;1601
+KMP,8,A systematic review of artificial intelligence techniques for collaborative learning over the past two decades,6,106;150;605;895;1232;1281
+KMP,9,AI technologies for education: Recent research & future directions,9,155;244;512;547;668;829;875;1045;1092
+KMP,10,Educational applications of artificial intelligence in simulation-based learning: A systematic mapping review,8,85;145;379;593;792;854;929;1407
+KMP,11,A scoping review on how generative artificial intelligence transforms assessment in higher education,2,1001;1086
+KMP,12,"A meta systematic review of artificial intelligence in higher education: a call for increased ethics, collaboration, and rigour",8,61;156;264;493;521;848;1353;1729
+KMP,13,Artificial intelligence for education and its emphasis on assessment and adversity quotient: a review,5,91;392;487;632;1544
+KMP,14,A comprehensive exploration of artificial intelligence competence frameworks for educators: A critical review,8,65;233;260;421;679;995;1056;1145
+KMP,15,A Systematic Review of Generative AI for Teaching and Learning Practice,6,51;174;392;990;1051;1468
+KMP,16,Generative Artificial Intelligence in Tertiary Education: Assessment Redesign Principles and Considerations,7,54;330;512;628;769;898;989
+KMP,17,A Systematic Review of AI-Driven Educational Assessment in STEM Education,8,26;146;360;479;729;824;1278;1479
+KMP,18,Transforming Education: A Comprehensive Review of Generative Artificial Intelligence in Educational Settings through Bibliometric and Content Analysis,12,93;248;449;594;827;902;952;1071;1143;1242;1405;1550
+KMP,19,What Is the Impact of ChatGPT on Education? A Rapid Review of the Literature,0,
+KMP,20,Systematic review of research on artificial intelligence applications in higher education – where are the educators?,6,83;441;764;943;1268;1432
+Boyer-Moore,1,Artificial intelligence literacy in higher and adult education: A scoping literature review,7,32;112;271;381;391;512;981
+Boyer-Moore,2,"Systematic literature review on opportunities, challenges, and future research recommendations of artificial intelligence in education",7,55;185;528;692;733;805;899
+Boyer-Moore,3,"Myths, mis- and preconceptions of artificial intelligence: A review of the literature",14,26;183;247;347;542;559;854;913;1006;1046;1209;1291;1363;1546
+Boyer-Moore,4,Opportunities of artificial intelligence for supporting complex problem-solving: Findings from a scoping review,5,105;564;935;1024;1179
+Boyer-Moore,5,Application and theory gaps during the rise of Artificial Intelligence in Education,9,79;216;451;527;697;824;1024;1150;1774
+Boyer-Moore,6,"A multi-perspective study on Artificial Intelligence in Education: grants, conferences, journals, software tools, institutions, and researchers",9,55;249;266;344;501;729;874;995;1112
+Boyer-Moore,7,Human-centred learning analytics and AI in education: A systematic literature review,7,89;393;748;873;1144;1334;1601
+Boyer-Moore,8,A systematic review of artificial intelligence techniques for collaborative learning over the past two decades,6,106;150;605;895;1232;1281
+Boyer-Moore,9,AI technologies for education: Recent research & future directions,9,155;244;512;547;668;829;875;1045;1092
+Boyer-Moore,10,Educational applications of artificial intelligence in simulation-based learning: A systematic mapping review,8,85;145;379;593;792;854;929;1407
+Boyer-Moore,11,A scoping review on how generative artificial intelligence transforms assessment in higher education,2,1001;1086
+Boyer-Moore,12,"A meta systematic review of artificial intelligence in higher education: a call for increased ethics, collaboration, and rigour",8,61;156;264;493;521;848;1353;1729
+Boyer-Moore,13,Artificial intelligence for education and its emphasis on assessment and adversity quotient: a review,5,91;392;487;632;1544
+Boyer-Moore,14,A comprehensive exploration of artificial intelligence competence frameworks for educators: A critical review,8,65;233;260;421;679;995;1056;1145
+Boyer-Moore,15,A Systematic Review of Generative AI for Teaching and Learning Practice,6,51;174;392;990;1051;1468
+Boyer-Moore,16,Generative Artificial Intelligence in Tertiary Education: Assessment Redesign Principles and Considerations,7,54;330;512;628;769;898;989
+Boyer-Moore,17,A Systematic Review of AI-Driven Educational Assessment in STEM Education,8,26;146;360;479;729;824;1278;1479
+Boyer-Moore,18,Transforming Education: A Comprehensive Review of Generative Artificial Intelligence in Educational Settings through Bibliometric and Content Analysis,12,93;248;449;594;827;902;952;1071;1143;1242;1405;1550
+Boyer-Moore,19,What Is the Impact of ChatGPT on Education? A Rapid Review of the Literature,0,
+Boyer-Moore,20,Systematic review of research on artificial intelligence applications in higher education – where are the educators?,6,83;441;764;943;1268;1432
+Rabin-Karp,1,Artificial intelligence literacy in higher and adult education: A scoping literature review,7,32;112;271;381;391;512;981
+Rabin-Karp,2,"Systematic literature review on opportunities, challenges, and future research recommendations of artificial intelligence in education",7,55;185;528;692;733;805;899
+Rabin-Karp,3,"Myths, mis- and preconceptions of artificial intelligence: A review of the literature",14,26;183;247;347;542;559;854;913;1006;1046;1209;1291;1363;1546
+Rabin-Karp,4,Opportunities of artificial intelligence for supporting complex problem-solving: Findings from a scoping review,5,105;564;935;1024;1179
+Rabin-Karp,5,Application and theory gaps during the rise of Artificial Intelligence in Education,9,79;216;451;527;697;824;1024;1150;1774
+Rabin-Karp,6,"A multi-perspective study on Artificial Intelligence in Education: grants, conferences, journals, software tools, institutions, and researchers",9,55;249;266;344;501;729;874;995;1112
+Rabin-Karp,7,Human-centred learning analytics and AI in education: A systematic literature review,7,89;393;748;873;1144;1334;1601
+Rabin-Karp,8,A systematic review of artificial intelligence techniques for collaborative learning over the past two decades,6,106;150;605;895;1232;1281
+Rabin-Karp,9,AI technologies for education: Recent research & future directions,9,155;244;512;547;668;829;875;1045;1092
+Rabin-Karp,10,Educational applications of artificial intelligence in simulation-based learning: A systematic mapping review,8,85;145;379;593;792;854;929;1407
+Rabin-Karp,11,A scoping review on how generative artificial intelligence transforms assessment in higher education,2,1001;1086
+Rabin-Karp,12,"A meta systematic review of artificial intelligence in higher education: a call for increased ethics, collaboration, and rigour",8,61;156;264;493;521;848;1353;1729
+Rabin-Karp,13,Artificial intelligence for education and its emphasis on assessment and adversity quotient: a review,5,91;392;487;632;1544
+Rabin-Karp,14,A comprehensive exploration of artificial intelligence competence frameworks for educators: A critical review,8,65;233;260;421;679;995;1056;1145
+Rabin-Karp,15,A Systematic Review of Generative AI for Teaching and Learning Practice,6,51;174;392;990;1051;1468
+Rabin-Karp,16,Generative Artificial Intelligence in Tertiary Education: Assessment Redesign Principles and Considerations,7,54;330;512;628;769;898;989
+Rabin-Karp,17,A Systematic Review of AI-Driven Educational Assessment in STEM Education,8,26;146;360;479;729;824;1278;1479
+Rabin-Karp,18,Transforming Education: A Comprehensive Review of Generative Artificial Intelligence in Educational Settings through Bibliometric and Content Analysis,12,93;248;449;594;827;902;952;1071;1143;1242;1405;1550
+Rabin-Karp,19,What Is the Impact of ChatGPT on Education? A Rapid Review of the Literature,0,
+Rabin-Karp,20,Systematic review of research on artificial intelligence applications in higher education – where are the educators?,6,83;441;764;943;1268;1432

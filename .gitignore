@@ -13,6 +13,9 @@ __pycache__/
 # Archivos de los artículos científicos originales
 data/articulos/
 
+# Modelos preentrenados (grandes y sujetos a sus propias licencias)
+data/models/
+
 # Texto extraído de los artículos
 texto_articulo.txt
 
