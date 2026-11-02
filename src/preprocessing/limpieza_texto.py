@@ -8,13 +8,9 @@ import unicodedata
 
 logger = logging.getLogger(__name__)
 
-# ---------------------------------------------------------------------------
-# Stopwords del inglés — se obtienen de NLTK (requisito académico).
-# Si NLTK no está instalado o el recurso no se ha descargado, se usa un
-# conjunto de respaldo equivalente para no bloquear la ejecución.
-# ---------------------------------------------------------------------------
-
-_STOPWORDS_RESPALDO: frozenset[str] = frozenset(
+# Equivalente práctico a nltk.corpus.stopwords.words("english"), sin descargar NLTK.
+# Tras tokenizar solo [a-z]+, las contracciones quedan partidas (don't → don, t).
+STOPWORDS_INGLES: frozenset[str] = frozenset(
     {
         "a",
         "about",
@@ -197,64 +193,15 @@ _STOPWORDS_RESPALDO: frozenset[str] = frozenset(
     }
 )
 
-
-def _cargar_stopwords() -> frozenset[str]:
-    """Carga stopwords desde NLTK; usa respaldo si no está disponible."""
-    try:
-        from nltk.corpus import stopwords  # noqa: WPS433 — import dentro de función
-
-        palabras = frozenset(stopwords.words("english"))
-        logger.info("Stopwords cargadas desde NLTK (%d palabras).", len(palabras))
-        return palabras
-    except (ImportError, LookupError):
-        logger.warning(
-            "NLTK no disponible o recurso 'stopwords' no descargado. "
-            "Se usa el conjunto de respaldo (%d palabras). "
-            "Ejecuta: python -m nltk.downloader stopwords",
-            len(_STOPWORDS_RESPALDO),
-        )
-        return _STOPWORDS_RESPALDO
-
-
-STOPWORDS_INGLES: frozenset[str] = _cargar_stopwords()
-
-# ---------------------------------------------------------------------------
-# Regex: captura ÚNICAMENTE palabras alfabéticas (incluye acentos y ñ),
-# excluyendo dígitos numéricos y guiones bajos.
-# Se usan word boundaries (\b) para delimitar tokens completos.
-# ---------------------------------------------------------------------------
-_PATRON_ALFABETICO = re.compile(r"(?<![a-záéíóúñ])[a-záéíóúñ]+(?![a-záéíóúñ])")
-
-
-_MARCADOR_ENIE = "\x02ENIE\x03"
-
-
-def _preservar_enie(texto: str) -> str:
-    """Reemplaza ñ/Ñ por un marcador ASCII antes de eliminar diacríticos.
-
-    La ñ en Unicode se descompone como n + combining tilde (~), por lo que
-    la eliminación de caracteres combinantes la destruye. Este paso la
-    protege con un marcador que no contiene caracteres combinantes.
-    """
-    return texto.replace("ñ", _MARCADOR_ENIE).replace("Ñ", _MARCADOR_ENIE)
-
-
-def _restaurar_enie(texto: str) -> str:
-    """Restaura los marcadores a la letra ñ real."""
-    return texto.replace(_MARCADOR_ENIE, "ñ")
+_PATRON_ALFABETICO = re.compile(r"[a-z]+")
 
 
 def normalizar_texto(texto: str | None) -> str:
     """Convierte un abstract a minúsculas y deja solo palabras alfabéticas.
 
-    Pasos:
-        1. Une cortes de línea con guion (hyphenation).
-        2. Pasa a minúsculas.
-        3. Preserva la ñ antes de eliminar diacríticos.
-        4. Normaliza NFKD y elimina caracteres combinantes (tildes).
-        5. Restaura la ñ.
-        6. Extrae tokens con ``\\b[a-záéíóúñ]+\\b`` (sin dígitos ni guiones
-           bajos).
+    Pasos: une cortes de línea, elimina diacríticos, pasa a minúsculas y
+    conserva estrictamente tokens `[a-z]+` (sin dígitos ni guiones bajos).
+    No elimina stopwords: eso queda para el conteo de frecuencias.
 
     Args:
         texto: Abstract original o cadena vacía.
@@ -272,28 +219,19 @@ def normalizar_texto(texto: str | None) -> str:
     if not isinstance(texto, str):
         raise TypeError(f"El texto debe ser str o None, no {type(texto).__name__}.")
 
-    # Eliminar soft hyphens.
     texto = texto.replace("\u00ad", "")
-    # Unir palabras cortadas por guion al final de línea.
     texto = re.sub(r"(?<=\w)-\s*\n\s*(?=\w)", "", texto)
-    # Minúsculas primero para simplificar el resto del pipeline.
-    texto = texto.lower()
-    # Proteger la ñ antes de la descomposición NFKD.
-    texto = _preservar_enie(texto)
-    # Descomponer y eliminar diacríticos (tildes combinantes).
     texto = unicodedata.normalize("NFKD", texto)
     texto = "".join(
         caracter for caracter in texto if not unicodedata.combining(caracter)
     )
-    # Restaurar la ñ protegida.
-    texto = _restaurar_enie(texto)
-    # Extraer únicamente tokens alfabéticos con word boundaries.
+    texto = texto.lower()
     tokens = _PATRON_ALFABETICO.findall(texto)
     return " ".join(tokens)
 
 
 def eliminar_stopwords(tokens: list[str]) -> list[str]:
-    """Filtra palabras vacías del inglés usando NLTK (o respaldo).
+    """Filtra palabras vacías del inglés.
 
     Args:
         tokens: Palabras ya en minúsculas y solo alfabéticas.
