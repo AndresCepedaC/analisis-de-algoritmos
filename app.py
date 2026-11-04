@@ -54,10 +54,117 @@ st.markdown(
       }
       [data-testid="stHeader"] { background: transparent; }
       [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #272344 0%, #342F5D 100%);
+        background: linear-gradient(180deg, #221E3E 0%, #2E2954 50%, #373166 100%);
       }
       [data-testid="stSidebar"] * { color: #F7F5FF; }
-      [data-testid="stSidebar"] [data-testid="stMetricValue"] { color: #BEB5FF; }
+
+      /* Tarjeta blanca de métrica en la barra lateral - CONTRASTE NEGRO ALTO */
+      [data-testid="stSidebar"] [data-testid="stMetric"] {
+        background: #FFFFFF !important;
+        border: 1.5px solid #DCD8EE !important;
+        padding: 1rem 1.15rem !important;
+        border-radius: 18px !important;
+        box-shadow: 0 10px 25px rgba(15, 12, 38, 0.28) !important;
+        margin-bottom: 1.1rem !important;
+      }
+      [data-testid="stSidebar"] [data-testid="stMetric"] * {
+        color: #0A0818 !important;
+      }
+      [data-testid="stSidebar"] [data-testid="stMetric"] label,
+      [data-testid="stSidebar"] [data-testid="stMetricLabel"],
+      [data-testid="stSidebar"] [data-testid="stMetricLabel"] *,
+      [data-testid="stSidebar"] [data-testid="stMetricLabel"] p {
+        color: #1A1730 !important;
+        font-size: 0.86rem !important;
+        font-weight: 750 !important;
+        letter-spacing: 0.02em !important;
+        text-transform: uppercase !important;
+      }
+      [data-testid="stSidebar"] [data-testid="stMetric"] [data-testid="stMetricValue"],
+      [data-testid="stSidebar"] [data-testid="stMetric"] [data-testid="stMetricValue"] * {
+        color: #0A0818 !important;
+        font-size: 2.3rem !important;
+        font-weight: 900 !important;
+        line-height: 1.15 !important;
+      }
+      [data-testid="stSidebar"] [data-testid="stMetric"] svg {
+        fill: #3C3660 !important;
+        color: #3C3660 !important;
+      }
+
+      /* Selectbox en la barra lateral con texto oscuro legible */
+      [data-testid="stSidebar"] .stSelectbox label p {
+        color: #F1EDFF !important;
+        font-size: 0.88rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 0.2rem !important;
+      }
+      [data-testid="stSidebar"] [data-baseweb="select"] {
+        border-radius: 12px !important;
+      }
+      [data-testid="stSidebar"] [data-baseweb="select"] > div {
+        background-color: #FFFFFF !important;
+        border: 1.5px solid #DCD8EE !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 12px rgba(15, 12, 38, 0.15) !important;
+      }
+      [data-testid="stSidebar"] [data-baseweb="select"] * {
+        color: #121020 !important;
+        font-weight: 600 !important;
+      }
+
+      /* Tarjeta elegante para el artículo seleccionado en la barra lateral */
+      .sidebar-article-card {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 16px;
+        padding: 1.1rem;
+        margin-top: 0.9rem;
+        margin-bottom: 0.9rem;
+        box-shadow: 0 6px 18px rgba(12, 10, 30, 0.2);
+      }
+      .sidebar-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #6656D9, #8778ED);
+        color: #FFFFFF !important;
+        font-size: 0.72rem;
+        font-weight: 800;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.55rem;
+      }
+      .sidebar-article-title {
+        color: #FFFFFF !important;
+        font-size: 0.96rem;
+        font-weight: 750;
+        line-height: 1.4;
+        margin: 0 0 0.55rem 0;
+      }
+      .sidebar-article-authors {
+        color: #D3CEF2 !important;
+        font-size: 0.8rem;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* Expander de abstract en la barra lateral */
+      [data-testid="stSidebar"] .stExpander {
+        background: rgba(255, 255, 255, 0.06) !important;
+        border: 1px solid rgba(255, 255, 255, 0.16) !important;
+        border-radius: 14px !important;
+        overflow: hidden !important;
+      }
+      [data-testid="stSidebar"] .stExpander summary {
+        color: #F3F0FF !important;
+        font-weight: 650 !important;
+      }
+      [data-testid="stSidebar"] .stExpander [data-testid="stMarkdownContainer"] p {
+        color: #E8E4FA !important;
+        font-size: 0.84rem !important;
+        line-height: 1.55 !important;
+      }
       .block-container { max-width: 1420px; padding-top: 2.4rem; }
       .hero {
         position: relative; overflow: hidden; padding: 2rem 2.2rem;
@@ -560,7 +667,11 @@ def main() -> None:
         st.stop()
 
     st.sidebar.markdown("### Explorar el corpus")
-    st.sidebar.metric("Artículos científicos", len(articulos), help="Corpus documental de la asignatura")
+    st.sidebar.metric(
+        "Artículos del proyecto",
+        len(articulos),
+        help="Corpus documental de 20 artículos científicos analizados",
+    )
     articulo_sidebar = st.sidebar.selectbox(
         "Vista rápida de un artículo",
         options=sorted(articulos),
@@ -568,11 +679,24 @@ def main() -> None:
         key="sidebar_article_preview",
     )
     ficha = articulos[articulo_sidebar]
-    st.sidebar.markdown(f"**{ficha['titulo']}**")
-    st.sidebar.caption(f"Autores: {ficha['autores']}")
-    with st.sidebar.expander("Leer abstract original"):
+    st.sidebar.markdown(
+        f"""
+        <div class="sidebar-article-card">
+          <span class="sidebar-badge">Artículo #{articulo_sidebar:02d}</span>
+          <div class="sidebar-article-title">{ficha['titulo']}</div>
+          <div class="sidebar-article-authors"><strong>Autores:</strong> {ficha['autores']}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    with st.sidebar.expander("📖 Leer abstract original"):
         abstract = ficha["abstract"]
-        st.write(abstract if len(abstract) <= 1400 else f"{abstract[:1400].rstrip()}…")
+        st.markdown(
+            f"<div style='font-size:0.85rem; line-height:1.55; color:#EAE6FA;'>{abstract}</div>"
+            if len(abstract) <= 1400
+            else f"<div style='font-size:0.85rem; line-height:1.55; color:#EAE6FA;'>{abstract[:1400].rstrip()}…</div>",
+            unsafe_allow_html=True,
+        )
     st.sidebar.divider()
     st.sidebar.caption(
         "El análisis usa el abstract original para buscar patrones y la versión "
